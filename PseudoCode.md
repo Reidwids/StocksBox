@@ -37,4 +37,7 @@
 7 - Footer
     7.1 - Add footer with website/project info
 
-Notes: Would like to implement typescript, SASS, JQuery, OAUTH and/or Bootstrap
+Notes: Would like to implement SASS, JQuery, OAUTH and/or Bootstrap
+
+Bug catching:
+On landing page, plage create new account or sign in within nav-bar when viewing leaderboards when not logged in

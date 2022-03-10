@@ -1,0 +1,49 @@
+
+.navbar{
+    background-image: linear-gradient(rgb(68, 226, 89), rgb(223, 255, 227))
+}
+
+/* Profile landing page */
+#profileGrid{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas: 
+    "subBar subBar subBar subBar subBar subBar subBar subBar"
+    "profileTag profileTag profileTag chart chart chart chart chart"
+    "profileTag profileTag profileTag chart chart chart chart chart"
+    "feed feed feed chart chart chart chart chart"
+    "feed feed feed chart chart chart chart chart"
+    "feed feed feed portfolio portfolio portfolio portfolio portfolio"
+    "feed feed feed portfolio portfolio portfolio portfolio portfolio"
+    "feed feed feed portfolio portfolio portfolio portfolio portfolio";
+    width: 95%;
+    margin: 0 auto; 
+    gap: 4px;
+    height: 80vh;
+}
+#profileGrid>*{
+    background-color: aqua;
+    padding: 30px;
+}
+/* Grid Elements */
+#profileHeader{
+    grid-area: subBar;
+    border: 2px solid black;
+}
+#profileInfo{
+    grid-area: profileTag;
+    border: 2px solid black;
+}
+#profileFeed{
+    grid-area: feed;
+    border: 2px solid black;
+}
+#overallProgress{
+    grid-area: chart;
+    border: 2px solid black;
+}
+#topPortfolios{
+    grid-area: portfolio;
+    border: 2px solid black;
+}

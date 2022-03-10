@@ -2,30 +2,57 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const ejsLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser')
+// const multer = require('multer');
+
 require('dotenv').config()
-const { auth } = require('express-openid-connect');
+
+let session = require('express-session');
+let passport = require('./authConfig/ppConfig');
+const flash = require('connect-flash');
 
 //Route Requires
-const indexRoute = require('./routes/signInRoute');
-
+const authRoutes = require("./routes/auth");
+const profileRoute = require('./routes/profile');
 
 //Initialize Server
 const app = express();
-const port = 3000;
-app.listen(port, ()=> console.log(`Port ${port} is running`));
+const port = process.env.PORT;
+
+// Parsing application
+
+app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
+
+//Login 
+app.use(session({
+  secret: process.env.secret,
+  saveUninitialized: true,
+  resave: false,
+  cookie: {maxAge: 36000000}
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+
+// Sharing the information with all pages.
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  res.locals.alerts = req.flash();
+  next();
+})
 
 // Initialize layouts and view engine
 app.use(ejsLayouts);
 app.set('view engine', 'ejs');
 
-//Link Routes
-// app.use('/',indexRoute);
-
 //Enable static files
 app.use(express.static('public'));
 
 //Link DB
-mongoose.connect("mongodb://localhost:27017/InvestBook", 
+mongoose.connect(process.env.mongoDBURL, 
 {
     useNewURLParser: true,
     useUnifiedTopology: true,
@@ -34,17 +61,56 @@ mongoose.connect("mongodb://localhost:27017/InvestBook",
 )
 
 
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://localhost:3000/',
-  clientID: 'KVQcrfTFRIHKS4FJYMz8gXqLtUT8zCfW',
-  issuerBaseURL: 'https://dev-tswrvacb.us.auth0.com'
-};
+//Image Saving Middleware
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
+  
+// const upload = multer({ storage: storage });
+// const imgModel = require('./models/user');
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
+// app.get('/', (req, res) => {
+//   imgModel.find({}, (err, items) => {
+//       if (err) {
+//           console.log(err);
+//           res.status(500).send('An error occurred', err);
+//       }
+//       else {
+//         //next line needs different routing
+//           res.render('ImagePage', { items: items });
+//       }
+//   });
+// });
 
-// req.isAuthenticated is provided from the auth router
-app.use('/',indexRoute);
+// app.post('/', upload.single('image'), (req, res, next) => {  
+//   const obj = {
+//       name: req.body.name,
+//       desc: req.body.desc,
+//       img: {
+//           data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+//           contentType: 'image/png'
+//       }
+//   }
+//   imgModel.create(obj, (err, item) => {
+//       if (err) {
+//           console.log(err);
+//       }
+//       else {
+//           // item.save();
+//           res.redirect('/');
+//       }
+//   });
+// });
+
+
+//Link Routes
+app.use('/', profileRoute);
+app.use('/', authRoutes);
+
+//Listen
+app.listen(port, ()=> console.log(`Port ${port} is running`));
