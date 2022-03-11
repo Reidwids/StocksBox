@@ -2,22 +2,18 @@
 const mongoose = require('mongoose');
 
 const portfolioSchema = mongoose.Schema({
-    ownerID: {
-        type: String
-    },
     name: {
         type: String,
         required: true,
         minlength: [3, "First name must be more than 3 characters"],
         maxlength: [99, "This is too much man.... Chill!!!"]
     },
-    typeOfAsset: {
-        type: String,
-        required: true,
-        minlength: [3, "First name must be more than 3 characters"],
-        maxlength: [99, "This is too much man.... Chill!!!"]
-    },
-    Assets:[{
+    assets:[{
+        typeOfAsset: {
+            type: String,
+            required: true,
+            enum: ['stocks', 'crypto']
+        },
         name: {
             type: String,
             required: true,
@@ -25,14 +21,18 @@ const portfolioSchema = mongoose.Schema({
         priceObtained: {
             type: Number,
             required: true,
-        }
-    }]
-
-}
-,
+            min: 0,
+        },
+    }],
+    isPublic: {
+        type: Boolean,
+        required: true,
+    }
+},
     {
         timestamps: true
-    })
+    }
+)
 
 const Portfolio = mongoose.model("Portfolio", portfolioSchema);
 

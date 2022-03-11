@@ -17,6 +17,7 @@
     1.4 - Initiate friends
         1.4.1 - search for friends
         1.4.2 - add and remove friends
+        1.4.3 - display add friend tag on other peoples profiles but not your own
     1.5 - Add profile tag to nav-bar 
 3 - Build Leaderboard
     3.1 - Leaderboard with checkboxes to customize output

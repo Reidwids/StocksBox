@@ -45,10 +45,10 @@ const userSchema = mongoose.Schema({
         //     ref: 'Posts'
         // }]
     // }
-    // portfolios:[{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Portfolios'
-        // }]
+    portfolios:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Portfolios'
+        }]
     //friends:[{
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: 'Friends'

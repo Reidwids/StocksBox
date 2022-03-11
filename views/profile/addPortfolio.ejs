@@ -1,1 +1,60 @@
-<p>New Portfolio</p>
+<div id="newPortfolio">
+    <h2>New Portfolio</h2>
+    <form method="POST" action="/profile">
+        <div class="form-group">
+            <label> Portfolio Name: </label>
+            <input type="text" name="name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Type Of Asset</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="assets.typeOfAsset" value='stocks' id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    US Stocks
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="assets.typeOfAsset" value='crypto' id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Crypto Currency
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Post Publicly?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isPublic" value='true' id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isPublic" value='false' id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                No
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label> Asset Ticker: </label>
+            <input type="text" name="asset.name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label> Price Obtained: </label>
+            <input type="number" name="asset.priceObtained" class="form-control" min=0/>
+        </div>
+        <!-- To implement datalist -->
+        <!-- <div class="form-group">
+            <label for="exampleDataList" class="form-label">Datalist example</label>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                mdl.data.forEach(x=>{
+                <option value="= x ">
+            </datalist>
+        </div> -->
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>

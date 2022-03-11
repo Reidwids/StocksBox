@@ -23,7 +23,6 @@
     height: 80vh;
 }
 #profileGrid>*{
-    background-color: aqua;
     padding: 30px;
 }
 /* Grid Elements */
@@ -46,4 +45,18 @@
 #topPortfolios{
     grid-area: portfolio;
     border: 2px solid black;
+}
+
+/* Add Portfolio */
+
+#addPortfolio{
+    display: flex;
+    width: 95%;
+    margin: 0 auto; 
+    height: 80vh;
+}
+
+.navbar-brand{
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 30px;
 }
