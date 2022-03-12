@@ -1,6 +1,6 @@
 <h1>Create a new account</h1>
 
-<form method="POST" action="/auth/signUp">
+<form method="POST" action="/auth/signUp" enctype="multipart/form-data">
   <div class="form-group">
     <label> First Name: </label>
     <input type="text" name="firstName" class="form-control" />
@@ -23,7 +23,10 @@
 
   <div class="form-group">
     <label> Preferred Currency: </label>
-    <input type="text" name="preferredCurrency" class="form-control" />
+    <select name="preferredCurrency" class="custom-select custom-select-sm">
+      <option value="CAD" selected>Canadian (CAD)</option>
+      <option value="USD">United States Dollar (USD)</option>
+  </select>
   </div>
   <br>
 
@@ -36,6 +39,6 @@
   <br>
 
   <div>
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <input type="submit" class="btn btn-primary">Sign Up</input>
   </div>
 </form>

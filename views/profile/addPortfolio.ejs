@@ -1,24 +1,9 @@
 <div id="newPortfolio">
     <h2>New Portfolio</h2>
-    <form method="POST" action="/profile">
+    <form method="POST" action="/profile/addPortfolio">
         <div class="form-group">
             <label> Portfolio Name: </label>
-            <input type="text" name="name" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Type Of Asset</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="assets.typeOfAsset" value='stocks' id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                    US Stocks
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="assets.typeOfAsset" value='crypto' id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                    Crypto Currency
-                </label>
-            </div>
+            <input type="text" name="portfolioName" class="form-control" />
         </div>
         <div class="form-group">
             <label>Post Publicly?</label>
@@ -35,14 +20,30 @@
                 </label>
             </div>
         </div>
-        <div class="form-group">
-            <label> Asset Ticker: </label>
-            <input type="text" name="asset.name" class="form-control" />
+        <br>
+        <div id="allAssets">
+            <div id="asset1">
+                <div class="form-group">
+                    <label> Asset Ticker: </label>
+                    <input type="text" name="assetName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label> Type of Asset: </label>
+                    <select name="typeOfAsset" class="custom-select custom-select-sm">
+                        <!-- Note that the values here are 1 digit so that the length function works in our controller -->
+                        <option value="S" selected>US Stocks</option>
+                        <option value="C">Crypto Currency</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label> Price Obtained: </label>
+                    <input type="number" name="priceObtained" class="form-control" min=0/>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label> Price Obtained: </label>
-            <input type="number" name="asset.priceObtained" class="form-control" min=0/>
-        </div>
+        <br>
+        <button type="button" id="newAsset">+ Add</button>
+        <br>
         <!-- To implement datalist -->
         <!-- <div class="form-group">
             <label for="exampleDataList" class="form-label">Datalist example</label>
@@ -52,8 +53,9 @@
                 <option value="= x ">
             </datalist>
         </div> -->
+        <br>
         <div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="submit" class="btn btn-primary"></input>
         </div>
     </form>
 

@@ -2,8 +2,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const ejsLayouts = require('express-ejs-layouts');
-const bodyParser = require('body-parser')
-// const multer = require('multer');
 
 require('dotenv').config()
 
@@ -28,7 +26,7 @@ const profileRoute = require('./routes/profile');
 app.use(session({
   secret: process.env.secret,
   saveUninitialized: true,
-  resave: false,
+  resave: true,
   cookie: {maxAge: 36000000}
 }))
 

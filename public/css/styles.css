@@ -4,6 +4,10 @@
 }
 
 /* Profile landing page */
+main{
+    width: 95%;
+    margin: 0 auto; 
+}
 #profileGrid{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -17,7 +21,6 @@
     "feed feed feed portfolio portfolio portfolio portfolio portfolio"
     "feed feed feed portfolio portfolio portfolio portfolio portfolio"
     "feed feed feed portfolio portfolio portfolio portfolio portfolio";
-    width: 95%;
     margin: 0 auto; 
     gap: 4px;
     height: 80vh;
