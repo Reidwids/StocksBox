@@ -1,10 +1,13 @@
 const finnhub = require('finnhub');
 const Portfolio = require('../models/portfolios').Portfolio;
 const Asset = require('../models/portfolios').Assets;
+
 require('dotenv').config()
 
 
 exports.getProfile = (req,res)=>{
+    // console.log(req.user);
+    // console.log(Asset.findById("622c2d43617720e8a4483f4d").assets)
     res.render('profile/profile');
 }
 exports.getCreatePortfolio = (req,res)=>{
@@ -24,18 +27,14 @@ exports.postCreatePortfolio = (req,res)=>{
             asset.priceObtained = req.body.priceObtained[i];
             asset.typeOfAsset = req.body.typeOfAsset[i];
         }
-        console.log(asset);
-        asset.save().then(()=>{
-            //Work on getting asset ID to push to portfolio properly
-            portfolio.assets.push(asset._id);
-        }).catch((err)=>{
-            console.log(err);
-        })
+        asset.save();
+        portfolio.assets.push(asset._id);
     }
     portfolio.save()
     .then(() =>{
-        // let asset = new Asset(req.body);
-        // req.user.portfolios = portfolio.id
+        req.user.portfolios.push(portfolio._id);
+        req.user.save();
+        // console.log('updated port: ', portfolio)
         res.redirect("/profile");
     })
     .catch((err)=>{
@@ -49,3 +48,9 @@ exports.postCreatePortfolio = (req,res)=>{
 // finnhubClient.quote("FB", (error, data, response) => {
 //   console.log(data.c)
 // });
+
+////code for finding property within a collection
+// Asset.findById(asset.id).then((asset)=>{
+//     console.log("assetName: ",asset.assetName);
+// });
+//Note that sometimes a then promise can stop an action from completing

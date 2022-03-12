@@ -9,6 +9,7 @@ const portfolioSchema = mongoose.Schema({
         maxlength: [99, "This is too much man.... Chill!!!"]
     },
     assets:[{
+        // type: String,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Assets'
     }],

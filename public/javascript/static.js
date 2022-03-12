@@ -16,8 +16,8 @@ function addAssetHTML(){
             <div class="form-group">
                 <label> Type of Asset: </label>
                 <select name="typeOfAsset" class="custom-select custom-select-sm">
-                    <option value="stocks" selected>US Stocks</option>
-                    <option value="crypto">Crypto Currency</option>
+                    <option value="S" selected>US Stocks</option>
+                    <option value="C">Crypto Currency</option>
                 </select>
             </div>
             <div class="form-group">
