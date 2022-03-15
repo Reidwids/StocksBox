@@ -1,10 +1,24 @@
 <div id="profileGrid">
-    <div id="profileHeader">header</div>
+    <div id="profileHeader">header
+        
+        <a class="nav-link" href="/profile/addPortfolio">+ New Portfolio</a>
+    </div>
     <div id="profileInfo">info</div> 
     <div id="profileFeed">feed</div>
     <div id="overallProgress">progress</div>
     <div id="topPortfolios">
-        <div>Portfolios</div>
-        <a class="nav-link" href="/profile/addPortfolio">+ New Portfolio</a>
-    </div>
-</div>
+        <label class="profileLabel ">Portfolios</label>
+        <div id="portfolioList">
+            <% user.portfolios.forEach((portfolio)=>{ %>
+                <div class="portfolioListEl">
+                    <label id="portfolioName"><%= portfolio.portfolioName %></label>
+                    <div id="portfolioTopAssets"><% portfolio.assets.forEach((asset)=>{ %>
+                        <div class="portfolioAsset"><%= asset.assetName %>: <%= asset.assetGain %></div>
+                    <% }) %> 
+                    </div>
+                    <div id="portfolioTotalGains">Gains: <% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
+                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= portfolio.gainsHist[portfolio.gainsHist.length-1] %> %: <%=  %></div>
+                </div>
+            <% }) %>
+            </div>
+        </div>

@@ -39,7 +39,9 @@ const userSchema = mongoose.Schema({
     //     type: String,
     //     maxlength: [200, "Less talky-talky more stocky-stocky"]
     // },
-    totalGains: Number,
+    userGainsHist: [{
+        type: Number,
+    }],
     // posts:[{
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: 'Posts'

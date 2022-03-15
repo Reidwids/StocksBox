@@ -1,7 +1,7 @@
 // Dependencies
 const mongoose = require('mongoose');
 
-const portfolioSchema = mongoose.Schema({
+const portfoliosSchema = mongoose.Schema({
     portfolioName: {
         type: String,
         required: true,
@@ -16,7 +16,10 @@ const portfolioSchema = mongoose.Schema({
     isPublic: {
         type: Boolean,
         required: true,
-    }
+    },
+    gainsHist: [{
+        type: Number,
+    }]
 },
     {
         timestamps: true
@@ -25,24 +28,32 @@ const portfolioSchema = mongoose.Schema({
 const assetsSchema = mongoose.Schema({
     typeOfAsset: {
         type: String,
-        // required: true,
+        required: true,
         enum: ['S', 'C']
     },
     assetName: {
         type: String,
-        // required: true,
+        required: true,
     },
     priceObtained: {
         type: Number,
-        // required: true,
+        required: true,
         min: 0,
     },
+    qtyOwned: {
+        type: Number,
+        required: true,
+        min: 0,
+    },
+    assetGain: {
+        type: Number,
+    }
 },
 {
     timestamps: true,
 });
 
-const Portfolio = mongoose.model("Portfolio", portfolioSchema);
+const Portfolios = mongoose.model("Portfolios", portfoliosSchema);
 const Assets = mongoose.model("Assets", assetsSchema);
 
-module.exports = {Portfolio, Assets};
+module.exports = {Portfolios, Assets};

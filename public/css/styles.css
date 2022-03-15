@@ -26,11 +26,15 @@ main{
     height: 80vh;
 }
 #profileGrid>*{
-    padding: 30px;
+    padding: 5px;
 }
 /* Grid Elements */
 #profileHeader{
     grid-area: subBar;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     border: 2px solid black;
 }
 #profileInfo{
@@ -62,4 +66,20 @@ main{
 .navbar-brand{
     font-family: 'Rubik Mono One', sans-serif;
     font-size: 30px;
+}
+
+.portfolioListEl{
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content:space-between;
+    align-items: center;
+}
+#portfolioTopAssets{
+    display: flex;
+}
+.portfolioAsset{
+    padding: 0 5px;
+}
+#arrow{
+    font-size: 20px;
 }

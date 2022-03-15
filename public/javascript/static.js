@@ -24,6 +24,10 @@ function addAssetHTML(){
                 <label> Price Obtained: </label>
                 <input type="number" name="priceObtained" class="form-control" min=0/>
             </div>
+            <div class="form-group">
+                    <label> Quantity Owned: </label>
+                    <input type="number" name="qtyOwned" class="form-control" min=0/>
+            </div>
         </div>`
     )
 }

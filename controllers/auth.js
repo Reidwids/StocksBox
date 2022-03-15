@@ -15,8 +15,6 @@ exports.auth_signup_get = (req, res) => {
 // HTTP POST - Signup - to post the data
 exports.auth_signup_post = (req, res) => {
     let user = new User(req.body);
-    console.log(req.body)
-    console.log(req.file);
     let hash = bcrypt.hashSync(req.body.password, salt);
     user.password = hash;
     const imagPath = '/uploads/' + req.file.filename;
