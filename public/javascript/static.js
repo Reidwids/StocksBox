@@ -9,7 +9,7 @@ let assetCounter = 1
 function addAssetHTML(){
     assetCounter++;
     allAssets.append(
-        `<div id="asset${assetCounter}">
+        `<div class="asset">
             <div class="form-group">
                 <label> Asset Ticker: </label>
                 <input type="text" name="assetName" class="form-control" />

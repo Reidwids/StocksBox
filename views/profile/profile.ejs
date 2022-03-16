@@ -30,6 +30,7 @@
                     <div id="portfolioTotalGains">Gains: <% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
                         <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> %: <%=  %></div>
                 </div>
+                <a class="editPortfolio" href="/profile/editPortfolio?id=<%= portfolio.id %>">Edit</a>
             <% }) %>
             </div>
         </div>

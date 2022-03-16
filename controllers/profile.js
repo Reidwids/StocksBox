@@ -56,7 +56,7 @@ exports.getVisitProfile = async (req,res)=>{
     chartData = {
         data: chartData
     }
-    res.render('profile/profile', {user, chartData: JSON.stringify(chartData)});
+    res.render('profile/visitProfile', {user, chartData: JSON.stringify(chartData)});
 }
 exports.getProfile = async (req,res)=>{
     let user = await User.findById(req.user.id).populate({
@@ -147,7 +147,127 @@ exports.postCreatePortfolio = async (req,res)=>{
     await req.user.save();
     res.redirect("/profile");
 }
+exports.getEditPortfolio = async (req,res)=>{
+    let portfolio = await Portfolio.findById(req.query.id).populate('assets');
+    res.render('profile/editPortfolio', {portfolio: portfolio});
+}
+exports.putUpdatePortfolio = async (req,res)=>{
+    await Portfolio.findByIdAndUpdate(req.body.id, req.body);
+    console.log('body: ',typeof req.body.assetId);
+    if (!Array.isArray(req.body.assetId)){
+        await Asset.findByIdAndUpdate(req.body.assetId, req.body);
+    }
+    else{
+        for (i=0;i<req.body.assetId.length;i++){
+            await Asset.findByIdAndUpdate(req.body.assetId[i], {
+                assetName: req.body.assetName[i],
+                typeOfAsset: req.body.typeOfAsset[i],
+                priceObtained: req.body.priceObtained[i],
+                qtyOwned: req.body.qtyOwned[i],
+            });
+        }
+    }
+    let user = await User.findById(req.user.id).populate({
+        path: 'portfolios',
+        model: 'Portfolios',
+        populate: {
+        path: 'assets',
+        model: 'Assets'
+        }
+    });
+    await updateUserGains(user);
+    res.redirect('/profile')
+  
 
+}
+exports.getDeletePortfolioRemoveGains = async (req,res)=>{
+    let user = await User.findById(req.user.id).populate({
+        path: 'portfolios',
+        model: 'Portfolios',
+        populate: {
+        path: 'assets',
+        model: 'Assets'
+        }
+    });
+    await updateUserGains(user);
+    let portfolio = await Portfolio.findById(req.query.id).populate('assets');
+    user.userGainsHist.push(user.userGainsHist[user.userGainsHist.length-1]-portfolio.gainsHist[portfolio.gainsHist.length-1])
+    user.userGainsHistTimestamps.push(new Date().toISOString())
+    for (let i=0; i<portfolio.assets.length;i++){
+        await Asset.findByIdAndDelete(portfolio.assets[i].id);
+    }
+    await Portfolio.findByIdAndDelete(portfolio.id)
+    await updateUserGains(user);
+    res.redirect('/profile');
+}
+exports.getDeletePortfolioKeepGains = async (req,res)=>{
+    let portfolio = await Portfolio.findById(req.query.id).populate('assets');
+    for (let i=0; i<portfolio.assets.length;i++){
+        await Asset.findByIdAndDelete(portfolio.assets[i].id);
+    }
+    await Portfolio.findByIdAndDelete(portfolio.id);
+    res.redirect('/profile');
+}
+exports.getEditUser = async (req,res)=>{
+    let user = await User.findById(req.user.id);
+    res.render('profile/editUser', {user});
+}
+exports.putUpdateUser = async (req,res)=>{
+    console.log(req.file)
+    console.log(req.body);
+    if (req.file){
+        const imagPath = '/uploads/' + req.file.filename;
+        await User.findByIdAndUpdate(req.user.id, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            preferredCurrency: req.body.preferredCurrency,
+            bio: req.body.bio,
+            image: imagPath,
+        })
+    }
+    else {
+        await User.findByIdAndUpdate(req.user.id, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            preferredCurrency: req.body.preferredCurrency,
+            bio: req.body.bio,
+        })
+    }
+    res.redirect('/profile');
+}
+exports.getDeleteUser = async (req,res)=>{
+    user = await User.findById(req.user.id).populate({
+        path: 'portfolios',
+        model: 'Portfolios',
+        populate: {
+        path: 'assets',
+        model: 'Assets'
+        }
+    })
+    for (let i=0; i<user.length;i++){
+        for (j=0; j<user.portfolios[i].length;j++){
+            await Asset.findByIdAndDelete(user.portfolios[i].assets[j].id);
+        }
+        await Portfolio.findByIdAndDelete(user.portfolios[i].id);
+    }
+    await User.findByIdAndDelete(req.user.id);
+    res.redirect('/profile');
+}
+
+exports.postSearchResult = async (req,res) =>{
+    let query = new RegExp(req.body.searchFriend, "i");
+    let matchingUsers = [];
+    let allUsers = await User.find();
+    allUsers.forEach(user=>{
+        if (query.test(user.firstName)&&user.id!==req.user.id){
+            matchingUsers.push(user);
+        }
+        else if(query.test(user.lastName)&&user.id!==req.user.id){
+            matchingUsers.push(user)
+        }
+    })
+    res.render('search/search', {matchingUsers: matchingUsers})
+}
 exports.getLeaderboard = async (req,res)=>{
     allUsers = await User.find();
     for (let user of allUsers){

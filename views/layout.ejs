@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
             <% if(currentUser) { %>
-            <form class="w-50" method="POST" action="/search">
+            <form class="w-50" method="POST" action="/searchResults">
               <div class="input-group">
                 <input class="form-control w-50" type="search" name='searchFriend' placeholder="Search" id='searchInput' aria-label="Search">
                 <button class="btn btn-outline-success" name='search' type="submit">Search</button>
@@ -45,7 +45,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Privacy Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Update Profile</a>
+                  <a class="dropdown-item" href="/profile/editUser">Edit Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/auth/logout">Logout</a>
                 </div>  

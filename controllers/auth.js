@@ -48,14 +48,14 @@ exports.auth_signin_get =  (req, res) => {
   
 
 // HTTP POST - Signin - to post the data
-exports.auth_signin_post = 
+exports.auth_signin_post =
   passport.authenticate("local", {
-
-      successRedirect: "/profile",
+      successRedirect: `/profile`,
       failureRedirect: "/auth/signIn",
       failureFlash: "Invalid username or password",
       successFlash: "You are logged in successfully"
   })
+
 
 // HTTP GET - Logout - to logout the user
 exports.auth_logout_get = (req, res) => {

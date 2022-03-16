@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const ejsLayouts = require('express-ejs-layouts');
+const methodOverride = require('method-override');
 
 require('dotenv').config()
 
@@ -15,6 +16,7 @@ const port = process.env.PORT;
 
 // Parsing application
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'));
 
 //Route Requires
 const authRoutes = require("./routes/auth");

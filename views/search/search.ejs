@@ -1,12 +1,13 @@
 
-<div class='usercard col-lg-3'>
-<img class='usercard-image' src='uploads/{{this.userImage}}'>
-<h4 class='usercard-name'>{{this.name}}</h4>
-<p class='usercard-username'>@({{this.username}})</p>
-<button class='usercard-button accept'>
-Accept
-</button>
-<button class='usercard-button reject'>
-Reject
-</button>
+<div id="searchResults">
+    <% matchingUsers.forEach(user=>{ %>
+    <% console.log('userid: ', user.id) %>
+
+    <div class='usercard col-lg-3'>
+        <img class='usercard-image' src="<%= user.image %>">
+        <div class='usercard-name'><%= user.firstName %> <%= user.lastName %></div>
+        <a href="/visitProfile?id=<%= user.id %>">Visit</a>
+    </div>
+    <% }) %>
+
 </div>
