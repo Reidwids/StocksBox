@@ -19,6 +19,9 @@ const portfoliosSchema = mongoose.Schema({
     },
     gainsHist: [{
         type: Number,
+    }],
+    gainsHistTimestamps: [{
+        type: Date,
     }]
 },
     {

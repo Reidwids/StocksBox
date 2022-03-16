@@ -35,12 +35,15 @@ const userSchema = mongoose.Schema({
     image:{
         type: String,
     },
-    // bio: {
-    //     type: String,
-    //     maxlength: [200, "Less talky-talky more stocky-stocky"]
-    // },
+    bio: {
+        type: String,
+        maxlength: [200, "Less talky-talky more stocky-stocky"]
+    },
     userGainsHist: [{
         type: Number,
+    }],
+    userGainsHistTimestamps: [{
+        type: Date,
     }],
     // posts:[{
         //     type: mongoose.Schema.Types.ObjectId,
@@ -50,11 +53,21 @@ const userSchema = mongoose.Schema({
     portfolios:[{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Portfolios'
-        }]
+        }],
+    followers:{
+        type: Array,
+        default: [],
+    },
+    followings:{
+        type: Array,
+        default: [],
+    }
+    //admin boolean false
     //friends:[{
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: 'Friends'
         // }]
+
 }
 ,
     {

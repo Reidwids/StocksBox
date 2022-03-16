@@ -1,24 +1,24 @@
 1 - Build sign in page
-    1.1 - Title page with OAUTH sign in
-    1.2 - Navbar with About and Sign In
-    1.3 - Sign in has create account option
-        1.3.1 - Creating account redirects to create account page w/form
-        1.3.2 - MMust fill in all data and set password/email
-        1.3.3 - Form creates new user object and redirects back to sign in
-    1.4 - Valid sign-in redirects to User Profile
-    1.5 - Invalid sign-in redirects to sign-in page  
-    1.6 - sign out button
+    -1.1 - Title page with OAUTH sign in
+    -1.2 - Navbar with About and Sign In
+    -1.3 - Sign in has create account option
+        -1.3.1 - Creating account redirects to create account page w/form
+        -1.3.2 - MMust fill in all data and set password/email
+       - 1.3.3 - Form creates new user object and redirects back to sign in
+    -1.4 - Valid sign-in redirects to User Profile
+    -1.5 - Invalid sign-in redirects to sign-in page  
+    -1.6 - sign out button
 2 - Build profile page
-    1.1 - Display user profile info
+    -1.1 - Display user profile info
     1.2 - Create/delete/update portfolio
         1.2.1 - Stock/crypto portfolio
-    1.3 - View portfolio stats
-        1.3.1 - tables & charts with gains/losses/price bought etc.
+   - 1.3 - View portfolio stats
+        -1.3.1 - tables & charts with gains/losses/price bought etc.
     1.4 - Initiate friends
         1.4.1 - search for friends
         1.4.2 - add and remove friends
         1.4.3 - display add friend tag on other peoples profiles but not your own
-    1.5 - Add profile tag to nav-bar 
+   - 1.5 - Add profile tag to nav-bar 
 3 - Build Leaderboard
     3.1 - Leaderboard with checkboxes to customize output
     3.2 - Leaderboard with friends or global

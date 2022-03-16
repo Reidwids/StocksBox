@@ -1,0 +1,22 @@
+<div id="leaderboardCont">
+    <table class="table" id="leaderboard">
+        <thead>
+          <tr>
+            <th scope="col">Ranking</th>
+            <th scope="col">User</th>
+            <th scope="col">Total Gains</th>
+            <th scope="col">Top Portfolios</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% allUserGains.users.forEach((user, i)=>{%>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= user[0] %></td>
+            <td><%= user[1] %></td>
+            <td>@mdo</td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+</div>

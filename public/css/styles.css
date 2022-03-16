@@ -47,6 +47,7 @@ main{
 }
 #overallProgress{
     grid-area: chart;
+    position: relative;
     border: 2px solid black;
 }
 #topPortfolios{
@@ -82,4 +83,41 @@ main{
 }
 #arrow{
     font-size: 20px;
+}
+#progressChartCont{
+    width:auto;
+    height:100%;
+}
+
+/* Profile Box Styling */
+#profileInfo{
+    display:flex;
+    flex-wrap: wrap;
+}
+#profileLabel{
+    display: block;
+    width: 100%;
+    height: 20%;
+    font-size: 25px;
+}
+#picWithBio{
+    display: flex;
+    height: 70%;
+    align-items: center;
+    padding: 0;
+}
+#profilePic{
+    width: auto;
+    height: 100%;    
+}
+#userBio{
+    display: block;
+    padding: 0 0 0 10px;
+}
+
+#leaderboardCont{
+
+}
+#leaderboard{
+    height: 80vh;
 }

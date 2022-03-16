@@ -1,11 +1,12 @@
 /*--- Query Selectors---*/
-const newAsset = $('#newAsset')
-const allAssets = $('#allAssets')
+const newAsset = $('#newAsset');
+const allAssets = $('#allAssets');
+const searchBar = $('#searchBar');
 newAsset.click(addAssetHTML);
+searchBar.keyup(searchUsers);
 let assetCounter = 1
 
 function addAssetHTML(){
-    console.log("hello")
     assetCounter++;
     allAssets.append(
         `<div id="asset${assetCounter}">
@@ -31,3 +32,8 @@ function addAssetHTML(){
         </div>`
     )
 }
+function searchUsers(){
+    console.log('hello')
+}
+
+
