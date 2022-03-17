@@ -52,6 +52,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 //Link DB
+// to connect online, put in the following as URL. replace password*****
+// put in 
 mongoose.connect(process.env.mongoDBURL, 
 {
     useNewURLParser: true,

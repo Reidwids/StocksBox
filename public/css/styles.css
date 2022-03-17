@@ -1,26 +1,35 @@
 
-.navbar{
-    background-image: linear-gradient(rgb(68, 226, 89), rgb(223, 255, 227))
-}
-
-/* Profile landing page */
+/* General */
 main{
     width: 95%;
     margin: 0 auto; 
+    --main-border-color: rgb(221, 221, 221);
 }
+
+/* NavBar */
+.navbar{
+    background-image: linear-gradient(rgb(68, 226, 89), rgb(223, 255, 227));
+    margin-bottom: 10px;
+}
+.navbar-brand{
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 30px;
+}
+
+/* Profile landing page */
 #profileGrid{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas: 
-    "subBar subBar subBar subBar subBar subBar subBar subBar"
     "profileTag profileTag profileTag chart chart chart chart chart"
     "profileTag profileTag profileTag chart chart chart chart chart"
-    "feed feed feed chart chart chart chart chart"
-    "feed feed feed chart chart chart chart chart"
-    "feed feed feed portfolio portfolio portfolio portfolio portfolio"
-    "feed feed feed portfolio portfolio portfolio portfolio portfolio"
-    "feed feed feed portfolio portfolio portfolio portfolio portfolio";
+    "profileTag profileTag profileTag chart chart chart chart chart"
+    "profileTag profileTag profileTag chart chart chart chart chart"
+    "profileTag profileTag profileTag chart chart chart chart chart"
+    "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio"
+    "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio"
+    "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio";
     margin: 0 auto; 
     gap: 4px;
     height: 80vh;
@@ -29,46 +38,33 @@ main{
     padding: 5px;
 }
 /* Grid Elements */
-#profileHeader{
-    grid-area: subBar;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    border: 2px solid black;
-}
 #profileInfo{
     grid-area: profileTag;
-    border: 2px solid black;
-}
-#profileFeed{
-    grid-area: feed;
-    border: 2px solid black;
+    border: 2px solid var(--main-border-color);
 }
 #overallProgress{
     grid-area: chart;
     position: relative;
-    border: 2px solid black;
+    border: 2px solid var(--main-border-color);
 }
-#topPortfolios{
-    grid-area: portfolio;
-    border: 2px solid black;
-}
-
-/* Add Portfolio */
-
-#addPortfolio{
-    display: flex;
-    width: 95%;
-    margin: 0 auto; 
-    height: 80vh;
-}
-
-.navbar-brand{
-    font-family: 'Rubik Mono One', sans-serif;
+.profileLabels{
+    display: block;
+    width: 80%;
     font-size: 30px;
 }
 
+/* Portfolio section */
+#topPortfolios{
+    grid-area: portfolio;
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid var(--main-border-color);
+}
+#portfolioLabels{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 .portfolioListEl{
     display: flex; 
     flex-wrap: wrap;
@@ -84,6 +80,7 @@ main{
 #arrow{
     font-size: 20px;
 }
+/* Chart */
 #progressChartCont{
     width:auto;
     height:100%;
@@ -93,12 +90,6 @@ main{
 #profileInfo{
     display:flex;
     flex-wrap: wrap;
-}
-#profileLabel{
-    display: block;
-    width: 100%;
-    height: 20%;
-    font-size: 25px;
 }
 #picWithBio{
     display: flex;

@@ -4,7 +4,8 @@
   "description": "Investing Facebook-Style App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
   },
   "author": "Derek Reid-Wilkinson",
   "license": "ISC",

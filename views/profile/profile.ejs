@@ -1,24 +1,22 @@
 <div id="profileGrid">
     <input type="hidden" value='<%= chartData %>' id="chartData">
-    <div id="profileHeader">header
-        
-        <a class="nav-link" href="/profile/addPortfolio">+ New Portfolio</a>
-    </div>
     <div id="profileInfo">
-        <label id="profileLabel"><%= user.firstName%> <%= user.lastName%></label>
+        <label class="profileLabels"><%= user.firstName%> <%= user.lastName%></label>
         <div id="picWithBio">
             <img src="<%= user.image %>" id="profilePic">
             <div id="userBio"><%= user.bio %></div>
         </div>
     </div> 
-    <div id="profileFeed">feed</div>
     <div id="overallProgress">
         <div id="progressChartCont">
             <canvas id="progressChart"></canvas>
         </div>
     </div>
     <div id="topPortfolios">
-        <label class="profileLabel ">Portfolios</label>
+        <div id="portfolioLabels">
+            <label class="profileLabels" >Portfolios</label>
+            <a class="nav-link" href="/profile/addPortfolio">+ New Portfolio</a>
+        </div>
         <div id="portfolioList">
             <% user.portfolios.forEach((portfolio)=>{ %>
                 <div class="portfolioListEl">
@@ -28,12 +26,13 @@
                     <% }) %> 
                     </div>
                     <div id="portfolioTotalGains">Gains: <% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
-                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> %: <%=  %></div>
+                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> %: <%=  %>
+                    </div>
+                    <a id="editPortfolio" href="/profile/editPortfolio?id=<%= portfolio.id %>">Edit</a>
                 </div>
-                <a class="editPortfolio" href="/profile/editPortfolio?id=<%= portfolio.id %>">Edit</a>
             <% }) %>
-            </div>
         </div>
+    </div>
 <script>
     
     // let user = JSON.parse(document.getElementById('userForScript').value);
@@ -51,15 +50,8 @@
             labels: chartDates,
             datasets:[{
                 data: chartVals,
-                // borderColor:rgb(200, 150, 90)
+                borderColor: "#bae755",
             }],
-            // {
-            //     label:'Progress2',
-            //     data:[
-            //         2,3,4,5,6,7,8,9
-            //     ],
-            //     // borderColor:rgb(255, 99, 132)
-            // },
         },
         options:{
             plugins: {
