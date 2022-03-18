@@ -1,15 +1,15 @@
 /*--- Query Selectors---*/
-const newAsset = $('#newAsset');
-const allAssets = $('#allAssets');
-const searchBar = $('#searchBar');
+const newAsset = $("#newAsset");
+const allAssets = $("#allAssets");
+const searchBar = $("#searchBar");
 newAsset.click(addAssetHTML);
 searchBar.keyup(searchUsers);
-let assetCounter = 1
+let assetCounter = 1;
 
-function addAssetHTML(){
-    assetCounter++;
-    allAssets.append(
-        `<div class="row asset">
+function addAssetHTML() {
+  assetCounter++;
+  allAssets.append(
+    `<div class="row asset">
         <div class="form-group col-md-3">
             <label class="form-label"> Asset Ticker: </label>
             <input type="text" name="assetName" class="form-control" placeholder="Ex. TSLA" required/>
@@ -32,10 +32,8 @@ function addAssetHTML(){
             <input type="number" name="qtyOwned" class="form-control" min=0 required/>
         </div>
     </div>`
-    )
+  );
 }
-function searchUsers(){
-    console.log('hello')
+function searchUsers() {
+  console.log("hello");
 }
-
-

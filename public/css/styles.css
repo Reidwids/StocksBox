@@ -1,110 +1,130 @@
 /* General */
-main{
-    width: 95%;
-    margin: 0 auto; 
-    --main-border-color: rgb(221, 221, 221);
-    --theme_green: rgb(11, 172, 38);
-    --theme_green_hover: rgb(10, 124, 29);
-    --delete_red: rgb(173, 0, 0);
-    --delete_red_hover: rgb(105, 0, 0);
+main {
+  width: 95%;
+  margin: 0 auto;
+  --main-border-color: rgb(221, 221, 221);
+  --theme_green: rgb(11, 172, 38);
+  --theme_green_hover: rgb(10, 124, 29);
+  --delete_red: rgb(173, 0, 0);
+  --delete_red_hover: rgb(105, 0, 0);
 }
 
 /* NavBar */
-.navbar{
-    background-image: linear-gradient(rgb(11, 172, 38), rgb(253, 255, 253));
-    margin-bottom: 10px;
+.navbar {
+  background-image: linear-gradient(rgb(11, 172, 38), rgb(253, 255, 253));
+  margin-bottom: 10px;
 }
-.navbar-brand{
-    font-family: 'Rubik Mono One', sans-serif;
-    font-size: 30px;
+.navbar-brand {
+  font-family: "Rubik Mono One", sans-serif;
+  font-size: 30px;
 }
-#boxingGlove{
-    width: 30px;
-    height: auto;
+#boxingGlove {
+  width: 30px;
+  height: auto;
 }
-.nav-link{
-    font-size: 18px;
-    margin: 10px;
+.nav-link {
+  font-size: 18px;
+  margin: 10px;
 }
-#searchInput{
-    font-size: 18px;
-    margin: 10px 0 10px 10px;
+#searchInput {
+  font-size: 18px;
+  margin: 10px 0 10px 10px;
 }
-#searchButton{
-    font-size: 18px;
-    margin: 10px 10px 10px 0;
+#searchButton {
+  font-size: 18px;
+  margin: 10px 10px 10px 0;
 }
 
 /* Sign In Page */
-#signInTitle{
-    margin-top: 20px;
+#signInTitle {
+  margin-top: 20px;
 }
-#signInSubtitle{
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center
+#signInSubtitle {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }
-#signInButtonCont{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+#signInButtonCont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
-
 
 /* SignUp Page and Edit User Page*/
-#signUpTitle, #editUserTitle, #signInTitle, #signInWebsiteTitle, #leaderboardTitle{
-    font-size: 30px;
-    font-weight: 600;
-    text-align: center
+#signUpTitle,
+#editUserTitle,
+#signInTitle,
+#signInWebsiteTitle,
+#leaderboardTitle {
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
 }
-#signUpPage, #editUserPage{
-    padding: 10px;
+#signUpPage,
+#editUserPage {
+  padding: 10px;
 }
-#submitSignUp, #submitEditUser, #submitEditPortfolio{
-    width: 100%;
-    text-align: center;
+#submitSignUp,
+#submitEditUser,
+#submitEditPortfolio {
+  width: 100%;
+  text-align: center;
 }
-.submitButton, .submitButton:active{
-    width: 200px;
-    background-color: var(--theme_green);
-    border: 1px solid black;
+.submitButton,
+.submitButton:active,
+#visitSearchButton,
+#visitSearchButton:active {
+  width: 200px;
+  background-color: var(--theme_green);
+  border: 1px solid black;
 }
-.submitButton:hover, .submitButton:focus{
-    background-color: var(--theme_green_hover);
-    border: 1px solid black;
+.submitButton:hover,
+.submitButton:focus,
+#visitSearchButton:hover,
+#visitSearchButton:focus {
+  background-color: var(--theme_green_hover);
+  border: 1px solid black;
 }
-.deleteButton, .deleteButton:active{
-    width: 200px;
-    background-color: var(--delete_red);
-    border: 1px solid black;
+.deleteButton,
+.deleteButton:active {
+  width: 200px;
+  background-color: var(--delete_red);
+  border: 1px solid black;
 }
-.deleteButton:hover, .deleteButton:focus{
-    background-color: var(--delete_red_hover);
-    border: 1px solid black;
+.deleteButton:hover,
+.deleteButton:focus {
+  background-color: var(--delete_red_hover);
+  border: 1px solid black;
 }
-#deleteUser, #deletePortfolio{
-    width: 100%;
-    text-align: center;
-    margin: 30px 0 0 0;
+#deleteUser,
+#deletePortfolio {
+  width: 100%;
+  text-align: center;
+  margin: 30px 0 0 0;
 }
-#deleteUserLabel, #deletePortfolioLabel{
-    font-weight: 700;
-    font-size: 20px;
-    margin-bottom: 10px;
+#deleteUserLabel,
+#deletePortfolioLabel {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
-#deleteUserLink, .deletePortfolioLink, #editPortfolioProfileLink{
-    text-decoration: none;
-    color: white;
+#deleteUserLink,
+.deletePortfolioLink,
+#editPortfolioProfileLink,
+#visitSearchButtonLink {
+  text-decoration: none;
+  color: white;
 }
-#deleteUserLink:hover, .deletePortfolioLink:hover{
-    color: white;
+#deleteUserLink:hover,
+.deletePortfolioLink:hover {
+  color: white;
 }
 /* Profile landing page */
-#profileGrid{
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-template-areas: 
+#profileGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-areas:
     "profileTag profileTag profileTag chart chart chart chart chart"
     "profileTag profileTag profileTag chart chart chart chart chart"
     "profileTag profileTag profileTag chart chart chart chart chart"
@@ -113,136 +133,138 @@ main{
     "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio"
     "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio"
     "portfolio portfolio portfolio portfolio portfolio portfolio portfolio portfolio";
-    margin: 0 auto; 
-    gap: 4px;
-    height: 80vh;
+  margin: 0 auto;
+  gap: 4px;
+  height: 80vh;
 }
- 
-@media (max-width:700px){
-    #profileGrid{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-areas: 
-        "profileTag"
-        "chart"
-        "portfolio"
-    }
+
+@media (max-width: 700px) {
+  #profileGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "profileTag"
+      "chart"
+      "portfolio";
+  }
 }
-#profileGrid>*{
-    padding: 5px;
+#profileGrid > * {
+  padding: 5px;
 }
 
 /* Profile Section */
-#profileInfo{
-    grid-area: profileTag;
-    border: 2px solid var(--main-border-color);
+#profileInfo {
+  grid-area: profileTag;
+  border: 2px solid var(--main-border-color);
 }
-#profileLabel{
-    font-size: 30px;
-    width: 100%;
+#profileLabel {
+  font-size: 30px;
+  width: 100%;
 }
-#picWithName{
-    display: flex;
-    height: 30%;
-    align-items: center;
+#picWithName {
+  display: flex;
+  height: 30%;
+  align-items: center;
 }
-#profilePic{
-    width: auto;
-    height: 100%;
-    border-radius: 5px;
+#profilePic {
+  width: auto;
+  height: 100%;
+  border-radius: 5px;
 }
-#profileLabel{
-    display: block;
-    padding: 0 0 0 10px;
-    font-weight: 600;
+#profileLabel {
+  display: block;
+  padding: 0 0 0 10px;
+  font-weight: 600;
 }
-#profileBio{
-    margin-top: 20px;
-    width: 100%;
+#profileBio {
+  margin-top: 20px;
+  width: 100%;
 }
-.profileBioLabel{
-    font-weight: 600;
+.profileBioLabel {
+  font-weight: 600;
 }
-.profileBioEl{
-    display: flex;
+.profileBioEl {
+  display: flex;
 }
-.newAsset, .newAsset:focus{
-    background-color: grey;
-    margin-bottom: 20px;
-    border: 1px solid black;
+.newAsset,
+.newAsset:focus {
+  background-color: grey;
+  margin-bottom: 20px;
+  border: 1px solid black;
 }
-.newAsset:hover, .newAsset:active{
-    background-color: rgb(92, 92, 92);
-    border: 1px solid black;
+.newAsset:hover,
+.newAsset:active {
+  background-color: rgb(92, 92, 92);
+  border: 1px solid black;
 }
 /* Portfolio section */
-#topPortfoliosProfile{
-    grid-area: portfolio;
+#topPortfoliosProfile {
+  grid-area: portfolio;
 }
-#portfolioAssetsProfile{
-    display: flex;
-    flex-wrap: wrap;
+#portfolioAssetsProfile {
+  display: flex;
+  flex-wrap: wrap;
 }
-.portfolioAssetProfile{
-    padding: 0 5px;
+.portfolioAssetProfile {
+  padding: 0 5px;
 }
-#arrow{
-    font-size: 20px;
+#arrow {
+  font-size: 20px;
 }
-#editPortfolioProfileLink{
-    color: white;
-    text-decoration: none;
+#editPortfolioProfile,
+#editPortfolioProfile:focus {
+  background-color: grey;
+  border: 1px solid black;
 }
-#editPortfolioProfile, #editPortfolioProfile:focus{
-    background-color: grey;
-    border: 1px solid black;
-}
-#editPortfolioProfile:hover, #editPortfolioProfile:active{
-    background-color: rgb(92, 92, 92);
-    border: 1px solid black;
+#editPortfolioProfile:hover,
+#editPortfolioProfile:active {
+  background-color: rgb(92, 92, 92);
+  border: 1px solid black;
 }
 /* Chart */
-#progressChartCont{
-    width:auto;
-    height:100%;
+#progressChartCont {
+  width: auto;
+  height: 100%;
 }
-#overallProgress{
-    grid-area: chart;
-    border: 2px solid var(--main-border-color);
+#overallProgress {
+  grid-area: chart;
+  border: 2px solid var(--main-border-color);
 }
 /* Leaderboard Styling */
-#leaderboardTitle{
-    margin-bottom: 20px;
+#leaderboardTitle {
+  margin-bottom: 20px;
 }
-#leaderboard{
-    height: 80vh;
+#leaderboard {
+  height: 80vh;
 }
 /* Search Results Styling */
-#searchResults{
-    display: flex;
-    flex-wrap: wrap;
+#searchResults {
+  display: flex;
+  flex-wrap: wrap;
 }
-.card{
-    margin: 10px;
+.card {
+  margin: 10px;
 }
 .card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
 }
-.cardButton{
-    width: 100%;
-    background-color: aqua;
-    display: flex;
-    justify-content: center;
+.cardButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.card-link{
-    width: 100%;
-    background-color: var(--theme_green);
-    text-decoration: none;
-    color: black;
-    text-align: center;
-    border-radius: 5px;
+.card-link {
+  width: 100%;
+  background-color: var(--theme_green);
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
 }
+
+
+
 /* New Portolfio and Edit Portfolio */

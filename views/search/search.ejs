@@ -9,7 +9,9 @@
               <h6 class="card-subtitle mb-2 text-muted"><%= user.location %></h6>
               <p class="card-text"><%= user.bio %></p>
               <div class="cardButton">
-                <a class="card-link" href="/visitProfile?id=<%= user.id %>">Visit</a>
+                <button class="btn btn-primary" id="visitSearchButton">
+                  <a class="card-link" id="visitSearchButtonLink" href="/visitProfile?id=<%= user.id %>">Visit</a>
+                </button>
               </div>
             </div>
           </div>

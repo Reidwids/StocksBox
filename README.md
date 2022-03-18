@@ -4,12 +4,14 @@
 
 **StockBox**  lets you face off against your friends to see who can build the best investment portfolio!
 <br>
+Create a profile, make a portfolio, and see how it ranks up against other users by checking the leaderboard.
+<br>
 <div id='imgBox'>
     <img class='screenshot' src="./public/images/DemoStockbox.png"/>
 </div>
 
 ## Technologies Used
-This project uses HTML, CSS, JavaScript, Jquery, Bootstrap, Node.js, MongoDB with mongoose, and Express.js. 
+This project uses Node.js, MongoDB with Mongoose, Express.js, HTML, CSS, JavaScript, Jquery, and Bootstrap. 
 
 ## Getting Started
 A free stockfinder API (finnhub) was used to build this app, so keep in mind that there were many limitations in terms of accessing historical data/live data.
