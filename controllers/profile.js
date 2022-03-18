@@ -152,20 +152,39 @@ exports.getEditPortfolio = async (req,res)=>{
     res.render('profile/editPortfolio', {portfolio: portfolio});
 }
 exports.putUpdatePortfolio = async (req,res)=>{
-    await Portfolio.findByIdAndUpdate(req.body.id, req.body);
+    let currentGain = 0;
     if (!Array.isArray(req.body.assetId)){
-        await Asset.findByIdAndUpdate(req.body.assetId, req.body);
+        let data = await(getQuote(req.body))
+        await Asset.findByIdAndUpdate(req.body.assetId, {
+            assetName: req.body.assetName,
+            typeOfAsset: req.body.typeOfAsset,
+            priceObtained: req.body.priceObtained,
+            qtyOwned: req.body.qtyOwned,
+            assetGain:  data*req.body.qtyOwned-req.body.priceObtained*req.body.qtyOwned
+        })
+        currentGain += data*req.body.qtyOwned-req.body.priceObtained*req.body.qtyOwned;
     }
     else{
         for (i=0;i<req.body.assetId.length;i++){
+            let tempParams = {
+                assetName: req.body.assetName[i],
+                typeOfAsset: req.body.typeOfAsset[i]
+            }
+            let data = await(getQuote(tempParams))
             await Asset.findByIdAndUpdate(req.body.assetId[i], {
                 assetName: req.body.assetName[i],
                 typeOfAsset: req.body.typeOfAsset[i],
                 priceObtained: req.body.priceObtained[i],
                 qtyOwned: req.body.qtyOwned[i],
+                assetGain:  data*req.body.qtyOwned[i]-req.body.priceObtained[i]*req.body.qtyOwned[i]
             });
+            currentGain += data*req.body.qtyOwned[i]-req.body.priceObtained[i]*req.body.qtyOwned[i];
         }
     }
+    await Portfolio.findByIdAndUpdate(req.body.id, {$push: {gainsHist: Math.round((currentGain)*100)/100}});
+    await Portfolio.findByIdAndUpdate(req.body.id, {$push: {gainsHistTimestamps: new Date().toISOString()}});
+    await Portfolio.findByIdAndUpdate(req.body.id, req.body);
+
     let user = await User.findById(req.user.id).populate({
         path: 'portfolios',
         model: 'Portfolios',
@@ -175,8 +194,6 @@ exports.putUpdatePortfolio = async (req,res)=>{
         }
     });
     await updateUserGains(user);
-    await updateUserGains(user);
-    console.log(req.user);
     res.redirect('/profile')
 }
 exports.getDeletePortfolioRemoveGains = async (req,res)=>{
@@ -307,7 +324,7 @@ async function getQuote(asset){
             });
         });
     }
-    else {
+    else if (asset.typeOfAsset == "C") {
         let temp = "BINANCE:USDT";
         let input = temp.slice(0,8)+ticker+temp.slice(8)
         let date = Math.round((new Date()).getTime()/1000);

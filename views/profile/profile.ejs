@@ -55,7 +55,11 @@
                       </td>
                       <td><% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
                         <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> 
-                        | <%=  Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1]/costOfAssets))%>%
+                        | <% if(portfolio.gainsHist[portfolio.gainsHist.length-1]>=0){ %>
+                        <%=  Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1]/costOfAssets)*100)%>%
+                        <% } else {%>
+                        -<%=  Math.round(((0-portfolio.gainsHist[portfolio.gainsHist.length-1])/costOfAssets)*100)%>%
+                        <% } %>
                       </td>
                       <td>
                         <button class="btn btn-primary" id="editPortfolioProfile">

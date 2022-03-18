@@ -38,18 +38,27 @@
                     <th scope="col" id="portfolioTotalGains">Gains</th>
                 </tr>
                 <tbody>
-                    <% user.portfolios.forEach((portfolio)=>{ %>
+                    <% user.portfolios.forEach((portfolio)=>{ 
+                        let costOfAssets = 0;%>
                     <tr class="portfolioListEl">
                       <td><%= portfolio.portfolioName %></td>
                       <td>
                         <div id="portfolioAssetsProfile">
-                            <% portfolio.assets.forEach((asset)=>{ %>
+                            <% portfolio.assets.sort((a,b)=>b.assetGain-a.assetGain).forEach((asset, i)=>{ 
+                                if(i<3){ %>
                                 <div class="portfolioAssetProfile"><%= asset.assetName %>: $<%= Math.round((asset.assetGain)*100)/100 %></div>
-                            <% }) %> 
+                            <% }
+                            costOfAssets+=asset.qtyOwned*asset.priceObtained;
+                        }) %> 
                         </div>
                       </td>
                       <td>Gains: <% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
-                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> %: <%=  %>
+                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> 
+                        | <% if(portfolio.gainsHist[portfolio.gainsHist.length-1]>=0){ %>
+                        <%=  Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1]/costOfAssets)*100)%>%
+                        <% } else {%>
+                        -<%=  Math.round(((0-portfolio.gainsHist[portfolio.gainsHist.length-1])/costOfAssets)*100)%>%
+                        <% } %>
                       </td>
                     </tr>
                     <% }) %>
