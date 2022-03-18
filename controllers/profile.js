@@ -124,7 +124,7 @@ exports.postCreatePortfolio = async (req,res)=>{
             asset.typeOfAsset = req.body.typeOfAsset[i];
             asset.qtyOwned = req.body.qtyOwned[i];
         }
-        let data = await getQuote(asset.assetName)
+        let data = await getQuote(asset)
         asset.assetGain = data*asset.qtyOwned-asset.priceObtained*asset.qtyOwned;
         currentGain += asset.assetGain;
         asset.save();
@@ -153,7 +153,6 @@ exports.getEditPortfolio = async (req,res)=>{
 }
 exports.putUpdatePortfolio = async (req,res)=>{
     await Portfolio.findByIdAndUpdate(req.body.id, req.body);
-    console.log('body: ',typeof req.body.assetId);
     if (!Array.isArray(req.body.assetId)){
         await Asset.findByIdAndUpdate(req.body.assetId, req.body);
     }
@@ -176,9 +175,9 @@ exports.putUpdatePortfolio = async (req,res)=>{
         }
     });
     await updateUserGains(user);
+    await updateUserGains(user);
+    console.log(req.user);
     res.redirect('/profile')
-  
-
 }
 exports.getDeletePortfolioRemoveGains = async (req,res)=>{
     let user = await User.findById(req.user.id).populate({
@@ -213,8 +212,6 @@ exports.getEditUser = async (req,res)=>{
     res.render('profile/editUser', {user});
 }
 exports.putUpdateUser = async (req,res)=>{
-    console.log(req.file)
-    console.log(req.body);
     if (req.file){
         const imagPath = '/uploads/' + req.file.filename;
         await User.findByIdAndUpdate(req.user.id, {
@@ -270,8 +267,9 @@ exports.postSearchResult = async (req,res) =>{
 }
 exports.getLeaderboard = async (req,res)=>{
     allUsers = await User.find();
-    for (let user of allUsers){
-        user = await User.findById(user.id).populate({
+    let allUserGains = [];
+    for (i=0;i<allUsers.length;i++){
+        let user = await User.findById(allUsers[i].id).populate({
             path: 'portfolios',
             model: 'Portfolios',
             populate: {
@@ -280,23 +278,45 @@ exports.getLeaderboard = async (req,res)=>{
             }
         })
         await updateUserGains(user);
-    }
+        let tempArr = [];
+        tempArr.push(user.firstName+" "+user.lastName)
+        if (user.userGainsHist){
+            tempArr.push(user.userGainsHist[user.userGainsHist.length-1])
+        }
+        else tempArr.push(0)
 
-    let allUserGains = [];
-    allUsers.forEach(user=>{
-        allUserGains.push([user.firstName+" "+user.lastName, user.userGainsHist[user.userGainsHist.length-1]])
-    })
+        if(user.portfolios[0]){
+            tempArr.push(user.portfolios.sort(function compareFn(a, b){(b.gainsHist[b.gainsHist.length-1]-a.gainsHist[a.gainsHist.length-1])})[0].portfolioName);
+        }
+        else tempArr.push('No Portfolios');
+        tempArr.push(user.id);
+        allUserGains.push(tempArr);
+    }
     allUserGains.sort((a,b)=>b[1]-a[1]);
     allUserGains = {users: allUserGains};
     res.render('leaderboard/leaderboard', {allUserGains: allUserGains})
 }
 // Functions
-async function getQuote(ticker){
-    let quote = await new Promise((resolve, reject)=>{
-        finnhubClient.quote(ticker, (error, data, response) => {
-        resolve(data.c)
+async function getQuote(asset){
+    let ticker = asset.assetName;
+    let quote;
+    if (asset.typeOfAsset == "S"){
+        quote = await new Promise((resolve, reject)=>{
+            finnhubClient.quote(ticker, (error, data, response) => {
+                resolve(data.c)
+            });
         });
-    });
+    }
+    else {
+        let temp = "BINANCE:USDT";
+        let input = temp.slice(0,8)+ticker+temp.slice(8)
+        let date = Math.round((new Date()).getTime()/1000);
+        quote = await new Promise((resolve, reject)=>{
+            finnhubClient.cryptoCandles(input, 1, date-100, date, (error, data, response) => {
+                resolve(data.c[data.c.length-1]);
+            });
+        });
+    }
     return quote;
 }
 
@@ -306,7 +326,7 @@ async function updateUserGains(user){
     for (let portfolio of user.portfolios){
         let currentGain = 0;
         for (let asset of portfolio.assets){
-            let data = await getQuote(asset.assetName);
+            let data = await getQuote(asset);
             await Asset.findByIdAndUpdate(asset.id, {assetGain: Math.round((data*asset.qtyOwned-asset.priceObtained*asset.qtyOwned)*100)/100});
             currentGain += asset.assetGain;
         }

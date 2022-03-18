@@ -1,37 +1,72 @@
 <div id="profileGrid">
     <input type="hidden" value='<%= chartData %>' id="chartData">
-    <div id="profileInfo">
-        <label class="profileLabels"><%= user.firstName%> <%= user.lastName%></label>
-        <div id="picWithBio">
+    <div id="profileInfo" class="container">
+        <div id="picWithName">
             <img src="<%= user.image %>" id="profilePic">
-            <div id="userBio"><%= user.bio %></div>
+            <label id="profileLabel"><%= user.firstName%> <br> <%= user.lastName%></label>
         </div>
+        <table id="profileBio" class="table">
+            <thread>
+                <tbody>
+                    <tr>
+                        <td class="profileBioLabel">Bio</td>
+                        <td><%= user.bio %></td>
+                    </tr>
+                    <tr>
+                        <td class="profileBioLabel">Investment Goals</td>
+                        <td><%= user.investmentGoals%></td>
+                    </tr>
+                    <tr>
+                        <td class="profileBioLabel">Location</td>
+                        <td><%= user.location %></td>
+                    </tr>
+                </tbody>
+            </thread>
+        </table>
     </div> 
     <div id="overallProgress">
         <div id="progressChartCont">
             <canvas id="progressChart"></canvas>
         </div>
     </div>
-    <div id="topPortfolios">
-        <div id="portfolioLabels">
-            <label class="profileLabels" >Portfolios</label>
-            <a class="nav-link" href="/profile/addPortfolio">+ New Portfolio</a>
-        </div>
-        <div id="portfolioList">
-            <% user.portfolios.forEach((portfolio)=>{ %>
-                <div class="portfolioListEl">
-                    <label id="portfolioName"><%= portfolio.portfolioName %></label>
-                    <div id="portfolioTopAssets"><% portfolio.assets.forEach((asset)=>{ %>
-                        <div class="portfolioAsset"><%= asset.assetName %>: $<%= Math.round((asset.assetGain)*100)/100 %></div>
-                    <% }) %> 
-                    </div>
-                    <div id="portfolioTotalGains">Gains: <% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
-                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> %: <%=  %>
-                    </div>
-                    <a id="editPortfolio" href="/profile/editPortfolio?id=<%= portfolio.id %>">Edit</a>
-                </div>
-            <% }) %>
-        </div>
+    <div id="topPortfoliosProfile">
+        <table id="portfolioListProfile" class="table">
+            <thread>
+                <tr class="portfolioListEl">
+                    <th scope="col" id="portfolioName">Portfolio Name</th>
+                    <th scope="col" id="portfolioTopAssets">Top Assets</th>
+                    <th scope="col" id="portfolioTotalGains">Gains</th>
+                    <th scope="col" id="edit">Edit</th>
+                </tr>
+                <tbody>
+                    <% user.portfolios.forEach((portfolio)=>{ 
+                        let costOfAssets = 0;%>
+                    <tr class="portfolioListEl">
+                      <td><%= portfolio.portfolioName %></td>
+                      <td>
+                        <div id="portfolioAssetsProfile">
+                            <% portfolio.assets.sort((a,b)=>b.assetGain-a.assetGain).forEach((asset, i)=>{ 
+                                if(i<3){ %>
+                                <div class="portfolioAssetProfile"><%= asset.assetName %>: $<%= Math.round((asset.assetGain)*100)/100 %></div>
+                            <% }
+                            costOfAssets+=asset.qtyOwned*asset.priceObtained;
+                        }) %> 
+                        </div>
+                      </td>
+                      <td><% if (portfolio.gainsHist[portfolio.gainsHist.length-1]>0) {%>
+                        <span id='arrow'>↑</span><% }else{ %><span id='arrow'>↓</span><% } %>$<%= Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1])*100)/100 %> 
+                        | <%=  Math.round((portfolio.gainsHist[portfolio.gainsHist.length-1]/costOfAssets))%>%
+                      </td>
+                      <td>
+                        <button class="btn btn-primary" id="editPortfolioProfile">
+                            <a id='editPortfolioProfileLink' href="/profile/editPortfolio?id=<%= portfolio.id %>">Edit</a>
+                        </button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </thread>
+        </table>
     </div>
 <script>
     

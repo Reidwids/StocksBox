@@ -1,42 +1,48 @@
-<form method="POST" action="/profile/updateUser?_method=PUT" enctype="multipart/form-data">
-    <div class="form-group">
-      <label> First Name: </label>
-      <input type="text" name="firstName" class="form-control" value="<%= user.firstName %>" />
-    </div>
-  
-    <div class="form-group">
-      <label> Last Name: </label>
-      <input type="text" name="lastName" class="form-control" value="<%= user.lastName %>"/>
-    </div>
-  
-    <div class="form-group">
-      <label> Preferred Currency: </label>
-      <select name="preferredCurrency" class="custom-select custom-select-sm">
-        <option value="CAD" <% if(user.preferredCurrency=='CAD') {%> selected<% } %>>Canadian (CAD)</option>
-        <option value="USD"<% if(user.preferredCurrency=='USD') {%> selected<% } %>>United States Dollar (USD)</option>
-    </select>
+<div id="editUserPage"></div>
+  <div id="editUserTitle">Edit account</div>
+  <form method="POST" action="/profile/updateUser?_method=PUT" enctype="multipart/form-data">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label class="form-label"> First Name: </label>
+        <input type="text" name="firstName" class="form-control" value="<%= user.firstName %>" />
+      </div>
+      <div class="form-group col-md-4">
+        <label class="form-label"> Last Name: </label>
+        <input type="text" name="lastName" class="form-control" value="<%= user.lastName %>"/>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="form-label"> Investment Goals: </label>
+        <input type="textarea" name="investmentGoals" class="form-control" maxlength='200' placeholder="Max 200 characters" value="<%= user.investmentGoals %>"/>
+      </div>
     </div>
     <br>
-  
-    <div class="form-group">
-      <label> Bio: </label>
-      <input type="textarea" name="bio" class="form-control" maxlength='200' placeholder="Max 200 characters" value="<%= user.bio %>"/>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="form-label"> Bio: </label>
+        <input type="textarea" name="bio" class="form-control" maxlength='200' placeholder="Max 200 characters" value="<%= user.bio %>"/>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="form-label"> Location: </label>
+        <input type="textarea" name="location" class="form-control" maxlength='30' placeholder="Enter your location" value="<%= user.location %>"/>
+      </div>
     </div>
-  
-    <div>
-      <label for="image">Upload Image</label>
+    <br>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label class="form-label" for="image">Upload Image</label>
+        <input class="form-control" type="file" id="image" name="image">
+      </div>
+    </div>
+    <br>
+      <div id="submitEditUser">
+        <input type="submit" class="btn btn-primary submitButton"></input>
+      </div>
+  </form>
+  <div id="deleteUser">
+      <label id="deleteUserLabel">Delete Your Profile</label>
       <br>
-      <input type="file" id="image" name="image">
-    </div>
-  
-    <br>
-  
-    <div>
-      <input type="submit" class="btn btn-primary"></input>
-    </div>
-</form>
-<div id="deleteUser">
-    <label id="deleteUser">Delete Your Profile</label>
-    <br>
-    <a class="deletePortfolio" href="/profile/deleteUser">Delete Permanently</a>  
+      <button class="btn btn-primary deleteButton">
+        <a id="deleteUserLink" href="/profile/deleteUser">Delete Permanently</a>  
+      </button>
+  </div>
 </div>

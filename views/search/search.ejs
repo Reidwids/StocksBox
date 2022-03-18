@@ -1,13 +1,18 @@
 
 <div id="searchResults">
     <% matchingUsers.forEach(user=>{ %>
-    <% console.log('userid: ', user.id) %>
 
-    <div class='usercard col-lg-3'>
-        <img class='usercard-image' src="<%= user.image %>">
-        <div class='usercard-name'><%= user.firstName %> <%= user.lastName %></div>
-        <a href="/visitProfile?id=<%= user.id %>">Visit</a>
-    </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src='<%= user.image %>' alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= user.firstName %> <%= user.lastName %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= user.location %></h6>
+              <p class="card-text"><%= user.bio %></p>
+              <div class="cardButton">
+                <a class="card-link" href="/visitProfile?id=<%= user.id %>">Visit</a>
+              </div>
+            </div>
+          </div>
+
     <% }) %>
-
 </div>

@@ -17,7 +17,13 @@ exports.auth_signup_post = (req, res) => {
     let user = new User(req.body);
     let hash = bcrypt.hashSync(req.body.password, salt);
     user.password = hash;
-    const imagPath = '/uploads/' + req.file.filename;
+    let imagPath;
+    if (req.file){
+      imagPath = '/uploads/' + req.file.filename;
+    }
+    else{
+      imagPath = '/images/profile-placeholder.jpg'
+    }
     user.image = imagPath;
     user.save()
     .then(() => {
@@ -52,8 +58,6 @@ exports.auth_signin_post =
   passport.authenticate("local", {
       successRedirect: `/profile`,
       failureRedirect: "/auth/signIn",
-      failureFlash: "Invalid username or password",
-      successFlash: "You are logged in successfully"
   })
 
 

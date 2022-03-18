@@ -1,9 +1,46 @@
-// const finnhub = require('finnhub');
-// require('dotenv').config();
-// const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-// api_key.apiKey = process.env.FINNHUB_KEY;
-// const finnhubClient = new finnhub.DefaultApi();
+const finnhub = require('finnhub');
+require('dotenv').config();
+const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+api_key.apiKey = 'c8llfdqad3ie52gnac3g';
+const finnhubClient = new finnhub.DefaultApi();
 
+async function getSymbols(){
+    let data2 = await new Promise((resolve, reject)=>{
+        finnhubClient.cryptoSymbols("BINANCE", (error, data, response) => {
+            resolve(data);
+        });
+    });
+    return data2
+}
+async function get(){
+    let data = await getSymbols()
+    let regex = /USDT/;
+    let USDTCryptos = [];
+    data.forEach(symbol=>{
+        if (regex.test(symbol.symbol)){
+            USDTCryptos.push(symbol.symbol);
+        }
+    })
+}
+
+async function getPrice(ticker){
+    let temp = "BINANCE:USDT";
+    let input = temp.slice(0,8)+ticker+temp.slice(8)
+    let date = Math.round((new Date()).getTime()/1000);
+    console.log('input: ', date)
+
+    let data2 = await new Promise((resolve, reject)=>{
+        finnhubClient.cryptoCandles(input, 1, date-100, date, (error, data, response) => {
+            resolve(data.c[0]);
+        });
+    });
+    return data2
+}
+async function get1(){
+    let data = await getPrice('BTC');
+    console.log(data);
+}
+get1();
 // let ticker = 'TD'
 // async function getQuote(ticker){
 //     let quote = await new Promise((resolve, reject)=>{
@@ -23,12 +60,3 @@
 // }
 
 // run();
-var moment = require('moment'); 
-var date = new Date("2022-03-15T18:30:27.834+00:00"); // some mock date
-var date2 = new Date("2022-03-15T18:00:27.834+00:00");
-var milliseconds = date.getTime()- date2.getTime(); 
-console.log(1000*60*60)
-console.log(milliseconds);
-
-let date1 = moment("2022-03-15T18:30:27.834+00:00").format('D/M/YY/LT');
-console.log(date1);

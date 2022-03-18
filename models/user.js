@@ -27,17 +27,23 @@ const userSchema = mongoose.Schema({
         required: true,
         minlength: [6, "Your password should be atleast 6 characters"]
     },
-    preferredCurrency: {
-        type: String,
-        required: true,
-        enum: ['CAD','USD'],
-    },
     image:{
         type: String,
     },
     bio: {
         type: String,
-        maxlength: [200, "Less talky-talky more stocky-stocky"]
+        maxlength: [200, "Less talky-talky more stocky-stocky"],
+        required: true,
+    },
+    investmentGoals: {
+        type: String,
+        maxlength: [200, "Less talky-talky more stocky-stocky"],
+        required: true,
+    },
+    location: {
+        type: String,
+        maxlength: [30, "Less talky-talky more stocky-stocky"],
+        required: true,
     },
     userGainsHist: [{
         type: Number,
@@ -45,31 +51,11 @@ const userSchema = mongoose.Schema({
     userGainsHistTimestamps: [{
         type: Date,
     }],
-    // posts:[{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Posts'
-        // }]
-    // }
     portfolios:[{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Portfolios'
         }],
-    followers:{
-        type: Array,
-        default: [],
-    },
-    followings:{
-        type: Array,
-        default: [],
-    }
-    //admin boolean false
-    //friends:[{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Friends'
-        // }]
-
-}
-,
+},
     {
         timestamps: true
     })
@@ -77,8 +63,6 @@ const userSchema = mongoose.Schema({
 
     // verifyPassword
     userSchema.methods.verifyPassword = function(password){
-        console.log(password);
-        console.log(this.password);
         return bcrypt.compareSync(password, this.password);
     }
 

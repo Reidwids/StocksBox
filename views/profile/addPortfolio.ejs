@@ -1,58 +1,61 @@
 <div id="newPortfolio">
     <h2>New Portfolio</h2>
-    <form method="POST" action="/profile/addPortfolio">
+    <form method="POST" action="/profile/addPortfolio" class="needs-validation" novalidate>
         <div class="form-group">
-            <label> Portfolio Name: </label>
-            <input type="text" name="portfolioName" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Post Publicly?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="isPublic" value='true' id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                Yes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="isPublic" value='false' id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                No
-                </label>
-            </div>
+            <label class="form-label"> Portfolio Name: </label>
+            <input type="text" name="portfolioName" class="form-control" minlength=2 maxlength=20 required/>
         </div>
         <br>
         <div id="allAssets">
-            <div id="asset1">
-                <div class="form-group">
-                    <label> Asset Ticker: </label>
-                    <input type="text" name="assetName" class="form-control" />
+            <div class="row asset">
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Asset Ticker: </label>
+                    <input type="text" name="assetName" class="form-control" placeholder="Ex. TSLA" required/>
                 </div>
-                <div class="form-group">
-                    <label> Type of Asset: </label>
-                    <select name="typeOfAsset" class="custom-select custom-select-sm">
+                <div class="form-group col-md-3" id="assetType">
+                    <label class="form-label"> Type of Asset: </label>
+                    <select name="typeOfAsset" class="form-select" required>
                         <!-- Note that the values here are 1 digit so that the length function works in our controller -->
                         <!-- if you change the below, you must change in static java as well -->
                         <option value="S" selected>US Stocks</option>
-                        <option value="C">Crypto Currency</option>
+                        <option value="C">Crypto</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label> Price Obtained: </label>
-                    <input type="number" name="priceObtained" class="form-control" min=0/>
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Price Obtained: </label>
+                    <input type="number" name="priceObtained" class="form-control" min=0 required/>
                 </div>
-                <div class="form-group">
-                    <label> Quantity Owned: </label>
-                    <input type="number" name="qtyOwned" class="form-control" min=0/>
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Quantity Owned: </label>
+                    <input type="number" name="qtyOwned" class="form-control" min=0 required/>
                 </div>
             </div>
         </div>
         <br>
-        <button type="button" id="newAsset">+ Add</button>
+        <button class="btn btn-primary newAsset" id='newAsset' type="button">+ Add</button>
         <br>
         <br>
         <div>
-            <input type="submit" class="btn btn-primary"></input>
+            <input type="submit" class="btn btn-primary submitButton" ></input>
         </div>
     </form>
-
 </div>
+<script>
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>

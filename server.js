@@ -67,4 +67,4 @@ app.use('/', profileRoute);
 app.use('/', authRoutes);
 
 //Listen
-app.listen(port||3000, ()=> console.log(`Port ${port} is running`));
+app.listen(port, ()=> console.log(`Port ${port} is running`));

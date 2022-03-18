@@ -1,53 +1,74 @@
-<h1>Create a new account</h1>
-
-<form method="POST" action="/auth/signUp" enctype="multipart/form-data" class="needs-validation" novalidate>
-  <div class="form-group">
-    <label for="validationCustom01" class="form-label" id="validationCustom01"> First Name: </label>
-    <input type="text" name="firstName" class="form-control" />
-    <div class="valid-feedback">Looks good!</div>
-    <div class="invalid-feedback">Provide a valid first name</div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"> Last Name: </label>
-    <input type="text" name="lastName" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label for="validationCustom02" class="form-label" "> Email Address: </label>
-    <input type="email" name="emailAddress" class="form-control" id="validationCustom02"/>
-    <div class="valid-feedback">Looks good!</div>
-    <div class="invalid-feedback">Provide a valid first name</div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"> Password: </label>
-    <input type="password" name="password" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label class="form-label"> Preferred Currency: </label>
-    <select name="preferredCurrency" class="custom-select custom-select-sm">
-      <option value="CAD" selected>Canadian (CAD)</option>
-      <option value="USD">United States Dollar (USD)</option>
-  </select>
-  </div>
+<div id="signUpPage">
+  <div id="signUpTitle">Create a new account</div>
   <br>
-
-  <div class="form-group">
-    <label class="form-label"> Bio: </label>
-    <input type="textarea" name="bio" class="form-control" maxlength='200' placeholder="Max 200 characters"/>
-  </div>
-
-  <div>
-    <label class="form-label" for="image">Upload Image</label>
+  <form method="POST" action="/auth/signUp" enctype="multipart/form-data" class="needs-validation" novalidate>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="validationCustom01" class="form-label"> First Name: </label>
+        <input type="text" name="firstName" class="form-control" id="validationCustom01" minlength='2' required/>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="form-label"> Last Name: </label>
+        <input type="text" name="lastName" minlength='2' class="form-control" required/>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="validationCustom02" class="form-label"> Email Address: </label>
+        <input type="email" name="emailAddress" class="form-control" id="validationCustom02" required/>
+        <div class="invalid-feedback">Provide a valid email</div>
+      </div>
+    </div>
     <br>
-    <input type="file" id="image" name="image">
-  </div>
-
-  <br>
-
-  <div>
-    <input type="submit" class="btn btn-primary"></input>
-  </div>
-</form>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="form-label"> Password: </label>
+        <input type="password" name="password" class="form-control" minlength='5' required/>
+        <div class="invalid-feedback">Password must be 5 characters</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="form-label"> Bio: </label>
+        <input type="textarea" name="bio" class="form-control" maxlength='200' placeholder="Max 200 characters" required/>
+        <div class="invalid-feedback">Provide a bio - be creative!</div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="form-label"> Investment Goals: </label>
+        <input type="textarea" name="investmentGoals" class="form-control" maxlength='200' placeholder="Max 200 characters" required/>
+        <div class="invalid-feedback">Tell us about your investment goals!</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="form-label"> Location: </label>
+        <input type="textarea" name="location" class="form-control" maxlength='30' placeholder="Enter your location" required/>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label class="form-label" for="image">Upload Image</label>
+        <input class="form-control" type="file" id="image" name="image">
+      </div>
+    </div>
+    <br>
+    <div id='submitSignUp'>
+      <input type="submit" class="btn btn-primary submitButton"></input>
+    </div>
+  </form>
+</div>
+<script>
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

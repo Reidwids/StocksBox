@@ -2,66 +2,54 @@
     <h2>Edit Portfolio</h2>
     <form method="POST" action="/profile/updatePortfolio?_method=PUT">
         <div class="form-group">
-            <label> Portfolio Name: </label>
-            <input type="text" name="portfolioName" class="form-control" value='<%= portfolio.portfolioName %>'/>
-        </div>
-        <div class="form-group">
-            <label>Post Publicly?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="isPublic" value='true' id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                Yes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="isPublic" value='false' id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                No
-                </label>
-            </div>
+            <label class="form-label"> Portfolio Name: </label>
+            <input type="text" name="portfolioName" value='<%= portfolio.portfolioName %>'' class="form-control" minlength=2 maxlength=20 required/>
         </div>
         <br>
         <div id="allAssets">
             <% portfolio.assets.forEach(asset=>{ %>
-            <div class="asset">
-                <div class="form-group">
-                    <label> Asset Ticker: </label>
-                    <input type="text" name="assetName" value='<%= asset.assetName %>' class="form-control" />
+            <div class="row asset">
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Asset Ticker: </label>
+                    <input type="text" name="assetName" class="form-control" value='<%= asset.assetName %>' placeholder="Ex. TSLA" required/>
                 </div>
-                <div class="form-group">
-                    <label> Type of Asset: </label>
-                    <select name="typeOfAsset" class="custom-select custom-select-sm">
+                <div class="form-group col-md-3" id="assetType">
+                    <label class="form-label"> Type of Asset: </label>
+                    <select name="typeOfAsset" class="form-select" required>
                         <!-- Note that the values here are 1 digit so that the length function works in our controller -->
                         <!-- if you change the below, you must change in static java as well -->
                         <option value="S" <% if(asset.typeOfAsset=='S') {%> selected<% } %>>US Stocks</option>
-                        <option value="C" <% if(asset.typeOfAsset=='C') {%> selected<% } %>>Crypto Currency</option>
+                        <option value="C" <% if(asset.typeOfAsset=='C') {%> selected<% } %>>Crypto</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label> Price Obtained: </label>
-                    <input type="number" name="priceObtained" value='<%= asset.priceObtained %>'class="form-control" min=0/>
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Price Obtained: </label>
+                    <input type="number" name="priceObtained" value='<%= asset.priceObtained %>' class="form-control" min=0 required/>
                 </div>
-                <div class="form-group">
-                    <label> Quantity Owned: </label>
-                    <input type="number" name="qtyOwned" value='<%= asset.qtyOwned %>' class="form-control" min=0/>
+                <div class="form-group col-md-3">
+                    <label class="form-label"> Quantity Owned: </label>
+                    <input type="number" name="qtyOwned" value='<%= asset.qtyOwned %>' class="form-control" min=0 required/>
                 </div>
-                <input type="hidden" name="assetId" value="<%= asset.id %>">        
             </div>
+            <input type="hidden" name="assetId" value="<%= asset.id %>">
             <% }) %>
         </div>
         <br>
-        <button type="button" id="newAsset">+ Add</button>
-        <br>
+        <button class="btn btn-primary newAsset" id='newAsset' type="button">+ Add</button>
         <br>
         <input type="hidden" name="id" value="<%= portfolio.id %>">
-        <div>
-            <input type="submit" class="btn btn-primary"></input>
+        <div id="submitEditPortfolio">
+            <input type="submit" class="btn btn-primary submitButton"></input>
         </div>
     </form>
     <div id="deletePortfolio">
         <label id="deletePortfolioLabel">Delete This Portfolio</label>
         <br>
-        <a class="deletePortfolio" href="/profile/deletePortfolioKeepGains?id=<%= portfolio.id %>">Delete & Keep Gains</a>  
-        <a class="deletePortfolio" href="/profile/deletePortfolioRemoveGains?id=<%= portfolio.id %>">Delete & Remove Gains</a>
+        <button class="btn btn-primary deleteButton">
+            <a class="deletePortfolioLink" href="/profile/deletePortfolioKeepGains?id=<%= portfolio.id %>">Delete & Keep Gains</a>  
+        </button>
+        <button class="btn btn-primary deleteButton">
+            <a class="deletePortfolioLink" href="/profile/deletePortfolioRemoveGains?id=<%= portfolio.id %>">Delete & Remove Gains</a>
+        </button>
     </div>
 </div>

@@ -1,11 +1,14 @@
 <div id="leaderboardCont">
+    <div id="leaderboardTitle">Global Leaderboard</div>
     <table class="table" id="leaderboard">
         <thead>
           <tr>
             <th scope="col">Ranking</th>
             <th scope="col">User</th>
             <th scope="col">Total Gains</th>
-            <th scope="col">Top Portfolios</th>
+            <th scope="col">Top Portfolio</th>
+            <th scope="col">Visit Profile</th>
+
           </tr>
         </thead>
         <tbody>
@@ -13,8 +16,13 @@
           <tr>
             <th scope="row"><%= i+1 %></th>
             <td><%= user[0] %></td>
-            <td><%= user[1] %></td>
-            <td>@mdo</td>
+            <td>$<%= user[1] %></td>
+            <td><%= user[2] %></td>
+            <td>
+              <button class="btn btn-primary" id="editPortfolioProfile">
+                <a id='editPortfolioProfileLink' href="/visitProfile?id=<%= user[3] %>">Visit</a>
+              </button>
+            </td>
           </tr>
           <% }) %>
         </tbody>

@@ -5,18 +5,14 @@ const portfoliosSchema = mongoose.Schema({
     portfolioName: {
         type: String,
         required: true,
-        minlength: [3, "First name must be more than 3 characters"],
-        maxlength: [99, "This is too much man.... Chill!!!"]
+        minlength: [2, "First name must be more than 3 characters"],
+        maxlength: [20, "This is too much man.... Chill!!!"]
     },
     assets:[{
         // type: String,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Assets'
     }],
-    isPublic: {
-        type: Boolean,
-        required: true,
-    },
     gainsHist: [{
         type: Number,
     }],
