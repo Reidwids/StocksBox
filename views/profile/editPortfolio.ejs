@@ -1,6 +1,6 @@
 <div id="newPortfolio">
     <h2>Edit Portfolio</h2>
-    <form method="POST" action="/profile/updatePortfolio?_method=PUT">
+    <form method="POST" action="/profile/updatePortfolio?_method=PUT" class="needs-validation" novalidate>
         <div class="form-group">
             <label class="form-label"> Portfolio Name: </label>
             <input type="text" name="portfolioName" value='<%= portfolio.portfolioName %>'' class="form-control" minlength=2 maxlength=20 required/>
