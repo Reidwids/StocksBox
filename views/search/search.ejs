@@ -5,16 +5,15 @@
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src='<%= user.image %>' alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title"><%= user.firstName %> <%= user.lastName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= user.location %></h6>
-              <p class="card-text"><%= user.bio %></p>
+              <h5 class="card-title text-truncate"><%= user.firstName %> <%= user.lastName %></h5>
+              <h6 class="card-subtitle mb-2 text-muted text-truncate"><%= user.location %></h6>
+              <p class="card-text text-truncate"><%= user.bio %></p>
               <div class="cardButton">
                 <button class="btn btn-primary" id="visitSearchButton">
-                  <a class="card-link" id="visitSearchButtonLink" href="/visitProfile?id=<%= user.id %>">Visit</a>
+                  <a id="visitSearchButtonLink" href="/visitProfile?id=<%= user.id %>">Visit</a>
                 </button>
               </div>
             </div>
           </div>
-
     <% }) %>
 </div>
