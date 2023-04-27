@@ -15,8 +15,6 @@ This project uses Node.js, MongoDB with Mongoose, Express.js, HTML, CSS, JavaScr
 
 ## Getting Started
 A free stockfinder API (finnhub) was used to build this app, so keep in mind that there were many limitations in terms of accessing historical data/live data.
-  
-To check out the app, <a href="https://stockbox1.herokuapp.com/" target="_blank">click here!</a>
 
 ## Next Steps
 - Add posts so users can post their actions to a main feed
